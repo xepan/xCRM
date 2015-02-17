@@ -18,7 +18,7 @@ class Model_Communication extends \Model_Table{
 		$this->addField('subject');
 		$this->addField('message')->type('text');
 		
-		$this->addField('action')->enum(array('bla bla'));
+		$this->addField('action')->enum(array('Created'));
 		$this->addField('created_at')->type('datetime')->defaultValue(date('Y-m-d H:i:s'));
 		$this->addField('updated_at')->type('datetime')->defaultValue(date('Y-m-d H:i:s'));
 
@@ -28,9 +28,12 @@ class Model_Communication extends \Model_Table{
 	}
 
 	function create($params=array(),$action){
+		
 		foreach ($params as $key => $value) {
 			$this[$key] = $value;
 		}
+
+		$this['action'] = $action;
 
 		$this->save();
 
